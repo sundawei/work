@@ -1,4 +1,4 @@
-// ConsoleApplication1.cpp : Defines the entry point for the console application.
+ï»¿// ConsoleApplication1.cpp : Defines the entry point for the console application.
 //
 
 #include "stdafx.h"
@@ -176,7 +176,7 @@ void on_mouse( int event, int x, int y, int flags, void* ustc)
 	}
 }
 
-/// È«¾Ö±äÁ¿
+/// å…¨å±€å˜é‡
 Mat img; Mat templ; Mat result;
 char* image_window = "Source Image";
 char* result_window = "Result window";
@@ -184,20 +184,20 @@ char* result_window = "Result window";
 int match_method;
 int max_Trackbar = 5;
 
-/// º¯ÊıÉùÃ÷
+/// å‡½æ•°å£°æ˜
 void MatchingMethod( int, void* );
 
 void doma(Mat im1,Mat im2)
 {
-	  /// ÔØÈëÔ­Í¼ÏñºÍÄ£°å¿é
+	  /// è½½å…¥åŸå›¾åƒå’Œæ¨¡æ¿å—
   img = im2;
   templ = im1;//imread( argv[2], 1 );
 
-  /// ´´½¨´°¿Ú
+  /// åˆ›å»ºçª—å£
   namedWindow( image_window, CV_WINDOW_NORMAL );
  // namedWindow( result_window, CV_WINDOW_AUTOSIZE );
 
-  /// ´´½¨»¬¶¯Ìõ
+  /// åˆ›å»ºæ»‘åŠ¨æ¡
   char* trackbar_label = "Method: \n 0: SQDIFF \n 1: SQDIFF NORMED \n 2: TM CCORR \n 3: TM CCORR NORMED \n 4: TM COEFF \n 5: TM COEFF NORMED";
   createTrackbar( trackbar_label, image_window, &match_method, max_Trackbar, MatchingMethod );
 
@@ -230,33 +230,33 @@ int main()
 
 void MatchingMethod( int, void* )
 {
-  /// ½«±»ÏÔÊ¾µÄÔ­Í¼Ïñ
+  /// å°†è¢«æ˜¾ç¤ºçš„åŸå›¾åƒ
 	Mat img_display=imread("c:/2.jpg");;
   //img.copyTo( img_display );
 
-  /// ´´½¨Êä³ö½á¹ûµÄ¾ØÕó
+  /// åˆ›å»ºè¾“å‡ºç»“æœçš„çŸ©é˜µ
   int result_cols =  img.cols - templ.cols + 1;
   int result_rows = img.rows - templ.rows + 1;
 
   result.create( result_cols, result_rows, CV_32FC1 );
 
-  /// ½øĞĞÆ¥ÅäºÍ±ê×¼»¯
+  /// è¿›è¡ŒåŒ¹é…å’Œæ ‡å‡†åŒ–
   matchTemplate( img, templ, result, match_method );
   normalize( result, result, 0, 1, NORM_MINMAX, -1, Mat() );
 
-  /// Í¨¹ıº¯Êı minMaxLoc ¶¨Î»×îÆ¥ÅäµÄÎ»ÖÃ
+  /// é€šè¿‡å‡½æ•° minMaxLoc å®šä½æœ€åŒ¹é…çš„ä½ç½®
   double minVal; double maxVal; Point minLoc; Point maxLoc;
   Point matchLoc;
 
   minMaxLoc( result, &minVal, &maxVal, &minLoc, &maxLoc, Mat() );
 
-  /// ¶ÔÓÚ·½·¨ SQDIFF ºÍ SQDIFF_NORMED, Ô½Ğ¡µÄÊıÖµ´ú±í¸ü¸ßµÄÆ¥Åä½á¹û. ¶ø¶ÔÓÚÆäËû·½·¨, ÊıÖµÔ½´óÆ¥ÅäÔ½ºÃ
+  /// å¯¹äºæ–¹æ³• SQDIFF å’Œ SQDIFF_NORMED, è¶Šå°çš„æ•°å€¼ä»£è¡¨æ›´é«˜çš„åŒ¹é…ç»“æœ. è€Œå¯¹äºå…¶ä»–æ–¹æ³•, æ•°å€¼è¶Šå¤§åŒ¹é…è¶Šå¥½
   if( match_method  == CV_TM_SQDIFF || match_method == CV_TM_SQDIFF_NORMED )
     { matchLoc = minLoc; }
   else
     { matchLoc = maxLoc; }
 
-  /// ÈÃÎÒ¿´¿´ÄúµÄ×îÖÕ½á¹û
+  /// è®©æˆ‘çœ‹çœ‹æ‚¨çš„æœ€ç»ˆç»“æœ
   rectangle( img_display, matchLoc, Point( matchLoc.x + templ.cols , matchLoc.y + templ.rows ), cvScalar(0,0,255), 2, 8, 0 );
  // rectangle( result, matchLoc, Point( matchLoc.x + templ.cols , matchLoc.y + templ.rows ), Scalar::all(0), 2, 8, 0 );
 
@@ -380,12 +380,12 @@ int main()
 
 
 
-	cvNamedWindow("¶şÖµÍ¼Ïñ",1);
-	cvNamedWindow("´¹Ö±»ı·ÖÍ¶Ó°",1);
-	cvNamedWindow("Ë®Æ½»ı·ÖÍ¶Ó°",1);
-	cvShowImage("¶şÖµÍ¼Ïñ",src);
-	cvShowImage("´¹Ö±»ı·ÖÍ¶Ó°",paintx);
-	cvShowImage("Ë®Æ½»ı·ÖÍ¶Ó°",painty);
+	cvNamedWindow("äºŒå€¼å›¾åƒ",1);
+	cvNamedWindow("å‚ç›´ç§¯åˆ†æŠ•å½±",1);
+	cvNamedWindow("æ°´å¹³ç§¯åˆ†æŠ•å½±",1);
+	cvShowImage("äºŒå€¼å›¾åƒ",src);
+	cvShowImage("å‚ç›´ç§¯åˆ†æŠ•å½±",paintx);
+	cvShowImage("æ°´å¹³ç§¯åˆ†æŠ•å½±",painty);
 	cvWaitKey(0);
 	cvDestroyAllWindows();
 	cvReleaseImage(&src);
